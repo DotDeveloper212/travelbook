@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:FluttTrav_Booking/pages/page_home.dart';
 
 void main() => runApp(MyApp());
-
+//test
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
