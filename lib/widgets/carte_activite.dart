@@ -14,6 +14,8 @@ class CarteActivite extends StatefulWidget {
 class _CarteActiviteState extends State<CarteActivite> with SingleTickerProviderStateMixin {
   AnimationController animationController;
   Animation animation;
+  bool check = false;
+
 
   @override
   void initState() {
@@ -163,6 +165,19 @@ class _CarteActiviteState extends State<CarteActivite> with SingleTickerProvider
               child: Text('11:30 am'),
             ),
           ),
+          Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Checkbox(
+                    value: check,
+                    onChanged: (bool value) {
+                        setState(() {
+                        check = value;
+                      });
+                    },
+                  ),
+                ],
+              ),
         ],
       ),
     );

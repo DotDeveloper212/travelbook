@@ -3,7 +3,10 @@ import 'package:FluttTrav_Booking/constant/valeurs.dart';
 import 'package:FluttTrav_Booking/modeles/modele_activite.dart';
 import 'package:FluttTrav_Booking/modeles/modele_ville.dart';
 import 'package:FluttTrav_Booking/widgets/carte_activite.dart';
+import 'package:FluttTrav_Booking/pages/page_panier.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
+import 'package:FluttTrav_Booking/constant/cart_bloc.dart';
 
 class PageDetails extends StatefulWidget {
   final ModeleVille modeleVille;
@@ -28,6 +31,13 @@ class _PageDetailsState extends State<PageDetails> {
   @override
   Widget build(BuildContext context) {
     taille = MediaQuery.of(context).size;
+
+    var bloc = Provider.of<CartBloc>(context);
+    int totalCount = 0;
+    if (bloc.cart.length > 0) {
+      totalCount = bloc.cart.values.reduce((a, b) => a + b);
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -57,20 +67,20 @@ class _PageDetailsState extends State<PageDetails> {
                     physics: BouncingScrollPhysics(),
                     itemCount: activites.length,
                     itemBuilder: (context, index) =>
-                        CarteActivite(activites[index]),
+                    CarteActivite(activites[index]),
                   ),
                 ),
               ],
             ),
             //buildCityInfo(),
           ),
-          buildAppbar(context),
+          buildAppbar(context,totalCount),
         ],
       ),
     );
   }
 
-  Widget buildAppbar(BuildContext context) {
+  Widget buildAppbar(BuildContext context,int totalCount) {
     return Material(
       color: Colors.black.withOpacity(0.2),
       child: SafeArea(
@@ -82,10 +92,34 @@ class _PageDetailsState extends State<PageDetails> {
             ),
             Spacer(),
             IconButton(
-                icon: Icon(Icons.search, color: Colors.white),
-                onPressed: () {}),
-            IconButton(
-                icon: Icon(Icons.menu, color: Colors.white), onPressed: () {}),
+                icon: Icon(Icons.shopping_cart, color: Colors.white),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PanierPage(),
+                    ),
+                  );
+                }),
+            /*Positioned(
+                child: new Stack(
+                children: <Widget>[
+                  new Icon(Icons.brightness_1,size: 20.0, color: Colors.red[700]),
+                  new Positioned(
+                    top: 3.0,
+                    right: 7,
+                    child: new Center(
+                      child: new Text('$totalCount',
+                      style: new TextStyle(
+                        color: Colors.white,
+                        fontSize: 12.0,
+                        fontWeight: FontWeight.w500),
+                      ),
+                    )
+                  )
+                ]
+                )
+            )*/
           ],
         ),
       ),
