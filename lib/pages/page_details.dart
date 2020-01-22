@@ -34,8 +34,8 @@ class _PageDetailsState extends State<PageDetails> {
 
     var bloc = Provider.of<CartBloc>(context);
     int totalCount = 0;
-    if (bloc.cart.length > 0) {
-      totalCount = bloc.cart.values.reduce((a, b) => a + b);
+    if (bloc.panier.length > 0) {
+      totalCount = bloc.panier.values.reduce((a, b) => a + b);
     }
 
     return Scaffold(
@@ -72,7 +72,6 @@ class _PageDetailsState extends State<PageDetails> {
                 ),
               ],
             ),
-            //buildCityInfo(),
           ),
           buildAppbar(context,totalCount),
         ],

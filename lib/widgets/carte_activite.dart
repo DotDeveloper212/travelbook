@@ -172,6 +172,7 @@ class _CarteActiviteState extends State<CarteActivite> with SingleTickerProvider
                     value: check,
                     onChanged: (bool value) {
                         setState(() {
+                        //bloc.ajouterDansPanier();
                         check = value;
                       });
                     },

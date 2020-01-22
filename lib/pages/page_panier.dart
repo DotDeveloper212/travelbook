@@ -8,7 +8,7 @@ class PanierPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var bloc = Provider.of<CartBloc>(context);
-    var cart = bloc.cart;
+    var cart = bloc.panier;
     return Scaffold(
       appBar: AppBar(
         title: Text("Panier"),
@@ -22,22 +22,15 @@ class PanierPage extends StatelessWidget {
             leading: Container(
               height: 70,
               width: 70,
-              /*decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/${giftIndex + 1}.jpg"),
-                  fit: BoxFit.fitWidth,
-                ),
-                borderRadius: BorderRadius.circular(12),
-              ),*/
             ),
-            title: Text('Item Count: $count'),
+            title: Text('Element no $count'),
             trailing: RaisedButton(
-              child: Text('Clear'),
+              child: Text('Effacer'),
               color: Theme.of(context).buttonColor,
               elevation: 1.0,
               splashColor: Colors.blueGrey,
               onPressed: () {
-                bloc.clear(giftIndex);
+                bloc.reinitialiser(giftIndex);
               },
             ),
           );
